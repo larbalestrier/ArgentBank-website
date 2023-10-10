@@ -6,7 +6,7 @@ function Home () {
     return (
         <div>
             <Banner/>
-            <articles className="features">
+            <section className="features">
                 <h2 className="sr-only">Features</h2>
                 {DataFeatures.map((feature, index) => (
                     <FeatureItem 
@@ -17,7 +17,7 @@ function Home () {
                         content={feature.content} 
                     />    
                     ))}  
-            </articles>
+            </section>
         </div>
     )
 }
