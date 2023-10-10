@@ -1,10 +1,11 @@
 import InputForm from "../../components/inputForm/inputForm"
+import Button from "../../components/button/button"
 
 function signIn () {
     return (
         <main className="main bg-dark">
             <section className="sign-in-content">
-                <i className="fa fa-user-circle sign-in-icon"></i>
+                <i className="fa fa-user-circle"></i>
                 <h1>Sign In</h1>
                 <form>
                     <InputForm
@@ -22,7 +23,9 @@ function signIn () {
                         label="Remember me"
                         id="remember-me"
                         type="checkbox"/>  
-                        
+                    <Button
+                        className="sign-in-button"
+                        name="Sign In"/> 
                 </form>
             </section>
         </main>
