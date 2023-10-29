@@ -1,34 +1,65 @@
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import InputForm from "../../components/inputForm/inputForm"
 import Button from "../../components/button/button"
 
-function signIn () {
+function SignIn () {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [checkBox, setCheckBox] = useState(false)
+
+    const navigate = useNavigate()
+
+    const fetchLogIn = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await fetch("http://localhost:3001/api/v1/user/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            })
+            const data = await response.json()
+            const token = data.body.token
+            console.log(token)
+            navigate("/user")
+        } catch (err) {
+            console.log(err)
+        }
+    }
     return (
         <main className="main bg-dark">
             <section className="sign-in-content">
                 <i className="fa fa-user-circle"></i>
                 <h1>Sign In</h1>
-                <form>
+                <form onSubmit={fetchLogIn}>
                     <InputForm
                         className="input-wrapper"
                         label="E-mail"
                         id="email"
-                        type="text" />
-                    <InputForm 
+                        type="text"
+                        autoComplete="email"
+                        onChange={(e) => setEmail(e.target.value)} />
+                    <InputForm
                         className="input-wrapper"
                         label="Password"
-                        id="Password"
-                        type="password"/> 
+                        id="password"
+                        type="password"
+                        autoComplete="current-password"
+                        onChange={(e) => setPassword(e.target.value)} />
                     <InputForm
                         className="input-remember"
                         label="Remember me"
                         id="remember-me"
-                        type="checkbox"/>  
+                        type="checkbox"
+                        onChange={() => setCheckBox(!checkBox)} />
                     <Button
                         className="sign-in-button"
-                        name="Sign In"/> 
+                        type="submit">
+                        Sign In
+                    </Button>
                 </form>
             </section>
         </main>
     )
 }
-export default signIn
+export default SignIn
