@@ -5,6 +5,7 @@ import Footer from '../layout/footer/footer'
 
 import Home from '../pages/home/home';
 import SignIn  from '../pages/signIn/signIn';
+import User from '../pages/user/user';
 
 function Router (){
     return (
@@ -12,7 +13,8 @@ function Router (){
             <Header/>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/SignIn" element={<SignIn/>}/>   
+                <Route path="/SignIn" element={<SignIn/>}/>  
+                <Route path="User" element={<User />} /> 
             </Routes>
             <Footer/>
         </BrowserRouter>

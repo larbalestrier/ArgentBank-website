@@ -14,11 +14,12 @@ html {
   }
   main{
     display: flex;
-    min-height: 85vh;
+    
   }
   
   .main {
     flex: 1;
+    min-height: 85vh;
   }
   
   .bg-dark {
@@ -267,6 +268,10 @@ html {
   .header {
     color: #fff;
     margin-bottom: 2rem;
+  }
+
+  .header h1 {
+    padding-top: 25px;
   }
   
   .transaction-button {
