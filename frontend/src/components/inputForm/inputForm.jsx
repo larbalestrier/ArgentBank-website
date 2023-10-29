@@ -1,11 +1,13 @@
-function inputForm ({className ,id , label, type}){
+function inputForm ({ className, id, label, type, autoComplete, onChange, value }) {
     return (
         <div className={className}>
-            <label form={id}>{label}</label>
-            <input 
+            <label htmlFor={id}>{label}</label>
+            <input
                 type={type}
                 id={id}
-            />
+                autoComplete={autoComplete}
+                onChange={onChange}
+                value={value} />
         </div>
     )
 }
