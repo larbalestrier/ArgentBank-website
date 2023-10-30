@@ -7,17 +7,22 @@ import Home from '../pages/home/home';
 import SignIn  from '../pages/signIn/signIn';
 import User from '../pages/user/user';
 
+import { Provider } from 'react-redux';
+import store from "../redux/store/store"
+
 function Router (){
     return (
-        <BrowserRouter>
-            <Header/>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/SignIn" element={<SignIn/>}/>  
-                <Route path="User" element={<User />} /> 
-            </Routes>
-            <Footer/>
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Header/>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/SignIn" element={<SignIn/>}/>  
+                    <Route path="User" element={<User />} /> 
+                </Routes>
+                <Footer/>
+            </BrowserRouter>
+        </Provider>
     )
 }
 export default Router
