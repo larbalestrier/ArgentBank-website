@@ -56,9 +56,9 @@ function SignIn () {
                         type="checkbox"
                         onChange={() => setCheckBox(!checkBox)} />
                     <Button
+                        name={'Sign In'}
                         className="sign-in-button"
                         type="submit">
-                        Sign In
                     </Button>
                 </form>
             </section>

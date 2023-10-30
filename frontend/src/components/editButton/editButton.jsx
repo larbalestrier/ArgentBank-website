@@ -46,16 +46,16 @@ function EditButton() {
                         value={newUserName} />
                     <br />
                     <Button
+                        name={'Save'}
                         className="edit-button"
                         onClick={editUserName}>
-                        Save
                     </Button>
                 </div>
             ) : (
                 <Button
+                    name={'View transactions'}
                     className="edit-button"
                     onClick={() => setIsEditing(true)}>
-                    Edit UserName
                 </Button>
             )}
         </div>
