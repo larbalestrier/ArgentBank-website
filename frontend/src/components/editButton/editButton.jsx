@@ -53,7 +53,7 @@ function EditButton() {
                 </div>
             ) : (
                 <Button
-                    name={'View transactions'}
+                    name={'Edit username'}
                     className="edit-button"
                     onClick={() => setIsEditing(true)}>
                 </Button>
