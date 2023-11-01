@@ -8,11 +8,18 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { setGetProfile } from "../../redux/reducers/profileSlice"
 
+import { useNavigate } from 'react-router-dom';
+
 function User() {
     const token = useSelector(state => state.userAuth.token)
     const profile = useSelector((state) => state.profile)
     const dispatch = useDispatch()
+    const navigate = useNavigate();
     useEffect(() => {
+        if(!token){
+            navigate('/signin');
+            return
+        }
         const fetchDataUser = async () => {
             try {
                 const response = await fetch("http://localhost:3001/api/v1/user/profile", {
@@ -28,7 +35,8 @@ function User() {
             }
         }
         fetchDataUser()
-    }, [token])
+    }, [token,navigate])
+    
     return (
     <div className="main  bg-dark">
         <div className="header">
