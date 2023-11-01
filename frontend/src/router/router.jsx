@@ -19,6 +19,7 @@ function Router (){
                     <Route path="/" element={<Home />} />
                     <Route path="/SignIn" element={<SignIn/>}/>  
                     <Route path="User" element={<User />} /> 
+                    <Route path="*" element={<Home />} />
                 </Routes>
                 <Footer/>
             </BrowserRouter>
