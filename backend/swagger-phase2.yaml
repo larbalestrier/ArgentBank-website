@@ -1,0 +1,245 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+  - https
+paths:
+  /user/accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: User accounts API
+      description: User bank account list retrieval API                                
+      responses:
+        '200':
+          description: user bank accounts successfully recovered
+          schema:
+            $ref: '#/definitions/UserAccounts'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+  /user/accounts/{accountID}/transactions:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: Retrieve all transactions of an account
+      description: Retrieve all transactions associated with a specific account.
+      parameters: 
+        - in : path
+          name: accountID
+          description: ID of the user's bank account
+          required: true
+          type : integer
+      responses: 
+        '200':
+          description: User bank account transactions successfully recovered
+          schema:
+            $ref: '#/definitions/UserAccountTransactions'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /user/accounts/{accountID}/transactions/current_month:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: Retrieve transactions of the current month
+      description: Retrieve transactions associated with a specific account for the current month.
+      parameters: 
+        - in: path
+          name: accountID
+          description: ID of the user's bank account
+          required: true
+          type: integer
+      responses: 
+        '200':
+          description: User bank account transactions for the current month successfully recovered
+          schema:
+            $ref: '#/definitions/UserAccountTransactions'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error 
+  /user/accounts/{accountID}/transactions/{transactionID}/category:
+    put :
+      security :
+        - Bearer: []
+      tags:
+        - User Module
+      summary: Update Category of a Transaction
+      description : Update the category of a user's bank account transaction using transactionID
+      parameters:
+        - in: path 
+          name: accountID
+          description: ID of the user's bank account
+          required: true
+          type : integer
+        - in: path 
+          name: transactionID
+          description: ID of the user's bank account transaction
+          required: true
+          type : integer
+        - in: body
+          name: body
+          description: Category Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Category'
+      produces:
+        - application/json
+      responses:
+        '204':
+          description: User bank account transaction category successfully updated (No content)
+        '400':
+          description: Bad request   
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+  /user/accounts/{accountID}/transactions/{transactionID}/note:
+    post :
+      security :
+        - Bearer: []
+      tags:
+        - User Module
+      summary: Add a note to a transaction
+      description: Add a note to a specific transaction in my API.
+      parameters :
+        - in: path 
+          name: accountID
+          description: ID of the user's bank account
+          required: true
+          type : integer
+        - in: path 
+          name: transactionID
+          description: ID of the user's bank account transaction
+          required: true
+          type : integer
+        - in: body
+          name: body
+          description: The note to add transaction.
+          required: true
+          schema:
+            $ref: '#/definitions/Note'
+      responses:
+        '200':
+          description: OK - The note has been successfully added to the transaction.
+        '400':
+          description: Bad Request - The request is invalid or missing required parameters.   
+        '401':
+          description: Unauthorized - You are not authorized to perform this action. Make sure you have the necessary authentication token (Bearer token).
+        '404':
+          description: Not Found - The specified resources (account, transaction) were not found. Please check the accountID and transactionID for validity.
+        '500':
+          description: Internal Server Error - An unexpected error occurred on the server while processing the request. Please try again later or contact the system administrator.
+  /user/accounts/{accountID}/transactions/{transactionID}/{noteID}:
+    delete : 
+      security :
+        - Bearer: []
+      tags:
+        - User Module
+      summary: Delete a note of a transaction
+      description: Delete a note to a specific transaction in my API.
+      parameters :
+        - in: path 
+          name: accountID
+          description: ID of the user's bank account
+          required: true
+          type : integer
+        - in: path 
+          name: transactionID
+          description: ID of the user's bank account transaction
+          required: true
+          type : integer
+        - in: path
+          name : noteID
+          description : The ID of the note you want delete.
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK - The note has been successfully deleted.
+        '400':
+          description: Bad Request - The request is invalid or missing required parameters.
+        '401':
+          description: Unauthorized - You are not authorized to perform this action. Ensure you have the necessary authentication token (Bearer token).
+        '404':
+          description: Not Found - The specified resource (note) was not found. Check if the noteID is valid.
+        '500':
+          description:  Internal Server Error - An unexpected error occurred on the server while processing the request. Please try again later or contact the system administrator.
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  UserAccounts:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        amount:
+          type: string
+        description:
+          type: string
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+      date:
+        type: string
+      description:
+        type: string
+      amount:
+        type: string
+      balance:
+        type: string
+      transaction_type:
+        type: string
+      category:
+        type: string
+      note:
+        type: string
+  UserAccountTransactions:
+    type: array
+    items:
+      $ref: '#/definitions/Transaction'
+  Category:
+    properties:
+      category:
+        type: string
+        description: transaction category 
+  Note:
+    properties:
+      note:
+        type: string
+        description: transaction note
+    
+    
+
+  
+                                       
