@@ -138,6 +138,11 @@ html {
       flex-direction: row;
     }
   }
+  @media (max-width: 920px) {
+    .main {
+      min-height: 100vh;
+    }
+  }
   
   .feature-icon {
     width: 100px;
